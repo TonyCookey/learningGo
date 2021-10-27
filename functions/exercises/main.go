@@ -1,17 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"learningGo/functions/exercises/functions"
+)
 
 func main() {
-	fmt.Println(funcDoubleReturns(14))
-}
+	// implementing funcDoubleReturns using func expressions
+	y, z := func(x int) (int, bool) {
+		firstReturn := x / 2
+		secondReturn := false
 
-func funcDoubleReturns(x int) (int, bool) {
-	firstReturn := x / 2
-	secondReturn := false
+		if x%2 == 0 {
+			secondReturn = true
+		}
+		return firstReturn, secondReturn
+	}(27)
+	fmt.Println(y, z)
 
-	if x%2 == 0 {
-		secondReturn = true
-	}
-	return firstReturn, secondReturn
+	fmt.Println(functions.FuncDoubleReturns(14))
+	x := []int{1, 2, 5, 12, 45, 18, 0}
+	fmt.Println(functions.FindMaxNumber(x...))
 }
