@@ -19,6 +19,6 @@ func main() {
 	fmt.Println(y, z)
 
 	fmt.Println(functions.FuncDoubleReturns(14))
-	x := []int{1, 2, 5, 12, 45, 18, 0}
+	x := []int{-70, -1, -2, -5, -12, -45, -18}
 	fmt.Println(functions.FindMaxNumber(x...))
 }

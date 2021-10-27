@@ -2,9 +2,9 @@ package functions
 
 func FindMaxNumber(x ...int) int {
 	var maxNumber int
-	for _, i := range x {
-		if i > maxNumber {
-			maxNumber = i
+	for i, v := range x {
+		if v > maxNumber || i == 0 {
+			maxNumber = v
 		}
 	}
 	return maxNumber
