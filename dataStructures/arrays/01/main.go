@@ -8,7 +8,7 @@ func main() {
 	fmt.Println(x, len(x))
 	for i := 65; i < 100; i++ {
 		x[i-65] = i
-		y[i-65] = string(i)
+		y[i-65] = string(rune(i))
 	}
 	fmt.Println(x)
 	fmt.Println(y)
