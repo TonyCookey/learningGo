@@ -24,5 +24,8 @@ func main() {
 	} else {
 		fmt.Println("this key does not exist on this map")
 	}
+	letter := 'A'
+	fmt.Println(letter)
+	fmt.Printf("%T \n", letter)
 
 }
