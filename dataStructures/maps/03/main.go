@@ -12,6 +12,8 @@ func main() {
 		2: "Ini",
 		3: "Ire",
 		4: "Kunmi",
+		5: "Timilehin",
+		6: "Tunde",
 	}
 	var keys []int
 	for k := range m {
