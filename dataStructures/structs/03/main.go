@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Person struct {
 	firstName string
 	lastName  string
@@ -12,4 +14,20 @@ type Person struct {
 type Personality struct {
 	temperament     string
 	personalityType string
+}
+
+func main() {
+	// Inheritance and Promotion of Structs
+	person1 := Person{
+		firstName: "Tony",
+		lastName:  "Cookey",
+		age:       23,
+		race:      "Black",
+		religion:  "Christianity",
+		Personality: Personality{
+			temperament:     "Sanguine",
+			personalityType: "Introverted Extrovert",
+		},
+	}
+	fmt.Println(person1)
 }
