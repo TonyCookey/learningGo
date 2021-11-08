@@ -29,5 +29,8 @@ func main() {
 			personalityType: "Introverted Extrovert",
 		},
 	}
-	fmt.Println(person1)
+	fmt.Println(person1.fullName())
+}
+func (p Person) fullName() string {
+	return p.firstName + " " + p.lastName
 }
