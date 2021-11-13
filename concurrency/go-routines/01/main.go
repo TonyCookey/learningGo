@@ -17,7 +17,7 @@ func main() {
 func myPrinter() {
 	for i := 0; i <= 10; i++ {
 		fmt.Println(i)
-		time.Sleep(time.Duration(time.Second))
+		time.Sleep(time.Second)
 	}
 	wg.Done()
 }

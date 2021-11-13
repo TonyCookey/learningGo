@@ -19,7 +19,7 @@ func main() {
 func dataRacer() {
 	for i := 0; i <= 10; i++ {
 		counter++
-		time.Sleep(time.Duration(100 * time.Millisecond))
+		time.Sleep(100 * time.Millisecond)
 		fmt.Println(counter)
 	}
 	wg.Done()

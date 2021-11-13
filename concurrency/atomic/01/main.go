@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
 var wg sync.WaitGroup
-var counter int
-var mutex sync.Mutex
+var counter int64
 
 func main() {
 	wg.Add(2)
@@ -20,12 +20,9 @@ func main() {
 
 func dataRacer(s string) {
 	for i := 0; i <= 10; i++ {
-		mutex.Lock()
-		counter++
 		time.Sleep(100 * time.Millisecond)
-		fmt.Println(s, counter)
-		mutex.Unlock()
-
+		atomic.AddInt64(&counter, 1)
+		fmt.Println(s, atomic.LoadInt64(&counter))
 	}
 	wg.Done()
 }
