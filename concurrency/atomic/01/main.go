@@ -20,7 +20,7 @@ func main() {
 
 func dataRacer(s string) {
 	for i := 0; i <= 10; i++ {
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 		atomic.AddInt64(&counter, 1)
 		fmt.Println(s, atomic.LoadInt64(&counter))
 	}
