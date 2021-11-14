@@ -4,8 +4,7 @@ import "fmt"
 
 func main() {
 	c := incrementor()
-	channelSum := puller(c)
-	for n := range channelSum {
+	for n := range puller(c) {
 		fmt.Println(n)
 	}
 }
