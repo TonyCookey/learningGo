@@ -6,33 +6,50 @@ import (
 )
 
 func main() {
-	in := gen(2, 3, 4, 5, 6, 7, 8, 9, 11, 23, 23, 45, 22, 12, 12, 34, 2, 1, 3, 133, 1, 3, 1, 22, 5, 6, 3, 66, 3)
+	in := gen()
 	// FAN OUT: distribute the square work across two go routines that both read from
-	ch1 := square(in)
-	ch2 := square(in)
+	ch1 := factorial(in)
+	ch2 := factorial(in)
+	ch3 := factorial(in)
+	ch4 := factorial(in)
+	ch5 := factorial(in)
+	ch6 := factorial(in)
+	ch7 := factorial(in)
+	ch8 := factorial(in)
+	ch9 := factorial(in)
+	ch10 := factorial(in)
 
 	// FAN IN: consuming the merged output from multiple channels
-	for n := range merge(ch1, ch2) {
+	for n := range merge(ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10) {
 		fmt.Println(n)
 	}
 }
 
-func gen(nums ...int) <-chan int {
+func gen() <-chan int {
 	outChan := make(chan int)
 
 	go func() {
-		for _, n := range nums {
-			outChan <- n
+		for i := 0; i < 100; i++ {
+			for j := 3; j < 13; j++ {
+				outChan <- j
+			}
 		}
 		close(outChan)
 	}()
 	return outChan
 }
-func square(ch <-chan int) <-chan int {
+func facts(n int) int {
+	total := 1
+	for i := n; i > 0; i-- {
+		total *= i
+	}
+	return total
+}
+func factorial(ch <-chan int) <-chan int {
 	outChan := make(chan int)
 	go func() {
 		for n := range ch {
-			outChan <- n * n
+			outChan <- facts(n)
 		}
 		close(outChan)
 	}()

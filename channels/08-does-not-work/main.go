@@ -7,7 +7,10 @@ import (
 
 func main() {
 	in := gen(2, 3, 4, 5, 6, 7, 8, 9, 11, 23, 23, 45, 22, 12, 12, 34, 2, 1, 3, 133, 1, 3, 1, 22, 5, 6, 3, 66, 3)
-	// FAN OUT: distrubute the square work across two go routines that both read from
+	// FAN OUT: distribute the square work across two go routines that both read from
+
+	// does not work when the make slice and append is used, the code works but the channels don't close
+	// there seems to be some sort of deadlock where the channels are still expecting something to be put on
 	xch := make([]<-chan int, 5)
 	for i := 0; i < 5; i++ {
 		xch = append(xch, square(in))
