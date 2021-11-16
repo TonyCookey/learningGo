@@ -20,8 +20,10 @@ func main() {
 	ch10 := factorial(in)
 
 	// FAN IN: consuming the merged output from multiple channels
+	var y int
 	for n := range merge(ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10) {
-		fmt.Println(n)
+		y++
+		fmt.Println("Loop Counter: ", y, "\t", n)
 	}
 }
 
