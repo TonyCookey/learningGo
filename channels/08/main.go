@@ -9,9 +9,10 @@ func main() {
 	in := gen(2, 3, 4, 5, 6, 7, 8, 9, 11, 23, 23, 45, 22, 12, 12, 34, 2, 1, 3, 133, 1, 3, 1, 22, 5, 6, 3, 66, 3)
 	// FAN OUT: distribute the square work across two go routines that both read from
 
-	//fixed the error of a deadlock
+	//fixed the deadlock error
 	// used var - zero value then appended to the slice rather than make the channels with their zero values already
 	// make , already created the channels inside the slice
+	// the already created 10 channels had not to be taken off
 	var xch []<-chan int
 	for i := 0; i < 5; i++ {
 		xch = append(xch, square(in))
