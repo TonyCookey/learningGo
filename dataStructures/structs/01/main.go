@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-type Person struct {
+type person struct {
 	firstName string
 	lastName  string
 	age       int
@@ -11,7 +11,7 @@ type Person struct {
 }
 
 func main() {
-	person1 := Person{
+	person1 := person{
 		firstName: "Tony",
 		lastName:  "Cookey",
 		age:       23,

@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type Person struct {
+type person struct {
 	First   string
 	Last    string
 	Age     int
@@ -15,7 +15,7 @@ type Person struct {
 }
 
 func main() {
-	var p1 Person
+	var p1 person
 	reader := strings.NewReader(`{
 		"First": "Tony",
 		"Last":  "Cookey",
