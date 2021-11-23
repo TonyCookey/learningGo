@@ -28,7 +28,7 @@ func squareRoot(x float64) (float64, error) {
 		return 0, &ErrNegNum{
 			errType:   "Computation Error",
 			operation: "Square Root",
-			err:       fmt.Errorf("square Root of a negative number (%v)", x),
+			err:       fmt.Errorf("square root of a negative number (%v)", x),
 		}
 	}
 	return math.Sqrt(x), nil
