@@ -11,6 +11,9 @@ type student struct {
 	course string
 	level  string
 }
+type human interface {
+	fullName()
+}
 
 func (s student) fullName() {
 	fmt.Println(s.firstName, s.lastName)
@@ -20,6 +23,9 @@ func (p person) fullName() {
 }
 func (s student) identity() {
 	fmt.Println("Student:", s.course, s.level)
+}
+func saySomething(h human) {
+	h.fullName()
 }
 func main() {
 	p1 := person{
@@ -38,4 +44,8 @@ func main() {
 	s1.fullName()
 	s1.person.fullName()
 	s1.identity()
+
+	// using interface
+	saySomething(s1)
+	saySomething(p1)
 }
