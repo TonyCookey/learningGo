@@ -8,7 +8,7 @@ import (
 )
 
 //ErrNegNum - idiomatic way of define error and starting the error with Capital letters and Err
-var ErrNegNum = errors.New("computation error: Square Root of a Negative Number")
+var ErrNegNum = errors.New("computation error: square root of a negative number")
 
 func main() {
 	val, err := squareRoot(-36)
