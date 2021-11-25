@@ -29,7 +29,7 @@ func saySomething(h human) {
 }
 func main() {
 	p1 := person{
-		firstName: "Tony",
+		firstName: "Anthony",
 		lastName:  "Cookey",
 	}
 	s1 := student{
