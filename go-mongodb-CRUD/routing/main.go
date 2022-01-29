@@ -33,7 +33,7 @@ func profile(res http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 		Age:       24,
 	}
 	profile, err := json.Marshal(user)
-
+	res.Header().Set("Content-Type", "application/json")
 	_, err = fmt.Fprint(res, string(profile))
 	if err != nil {
 		log.Fatal(err)
