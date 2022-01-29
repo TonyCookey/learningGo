@@ -19,11 +19,32 @@ func NewUserController(session *mgo.Session) *UserController {
 	return &UserController{session}
 }
 
-func (uc *UserController) Profile(res http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
-	_, err := fmt.Fprint(res, "My Profile")
-	if err != nil {
-		log.Fatal(err)
+func (uc *UserController) Profile(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
+	id := params.ByName("id")
+	fmt.Println(id)
+
+	if !bson.IsObjectIdHex(id) {
+		res.WriteHeader(http.StatusNotFound)
+		return
 	}
+	ID := bson.ObjectIdHex(id)
+
+	user := models.User{}
+
+	err := uc.session.DB("learning-go").C("users").FindId(ID).One(&user)
+	if err != nil {
+		fmt.Println("Could not find user", err)
+		res.WriteHeader(http.StatusNotFound)
+		return
+	}
+	result, err := json.Marshal(&user)
+	if err != nil {
+		res.WriteHeader(http.StatusNotFound)
+		return
+	}
+	res.Header().Set("Content-Type", "application/json")
+	res.WriteHeader(http.StatusCreated)
+	fmt.Fprint(res, string(result))
 }
 
 func (uc *UserController) CreateUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -34,9 +55,15 @@ func (uc *UserController) CreateUser(res http.ResponseWriter, req *http.Request,
 
 	// generate new user ID
 	newUser.ID = bson.NewObjectId()
+	fmt.Println(newUser.ID)
 
 	// store the new user in the DB
-	uc.session.DB("learning-go").C("users").Insert(newUser)
+	err := uc.session.DB("learning-go").C("users").Insert(newUser)
+	if err != nil {
+		fmt.Println("could not insert")
+		res.WriteHeader(http.StatusNotFound)
+		return
+	}
 
 	result, err := json.Marshal(newUser)
 	if err != nil {

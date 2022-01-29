@@ -13,6 +13,7 @@ func main() {
 	router := httprouter.New()
 	userController := controllers.NewUserController(getSession())
 	router.GET("/", index)
+	router.GET("/user/:id", userController.Profile)
 	router.POST("/create", userController.CreateUser)
 	err := http.ListenAndServe(":8080", router)
 	if err != nil {
