@@ -15,6 +15,7 @@ func main() {
 	router.GET("/", index)
 	router.GET("/user/:id", userController.Profile)
 	router.POST("/create", userController.CreateUser)
+	router.DELETE("/user/:id", userController.DeleteUser)
 	err := http.ListenAndServe(":8080", router)
 	if err != nil {
 		log.Fatal(err)

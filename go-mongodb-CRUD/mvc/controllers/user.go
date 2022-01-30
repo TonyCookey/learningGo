@@ -19,7 +19,7 @@ func NewUserController(session *mgo.Session) *UserController {
 	return &UserController{session}
 }
 
-func (uc *UserController) Profile(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
+func (uc *UserController) Profile(res http.ResponseWriter, _ *http.Request, params httprouter.Params) {
 	id := params.ByName("id")
 	fmt.Println(id)
 
@@ -71,5 +71,33 @@ func (uc *UserController) CreateUser(res http.ResponseWriter, req *http.Request,
 	}
 	res.Header().Set("Content-Type", "application/json")
 	res.WriteHeader(http.StatusCreated)
+	fmt.Fprint(res, string(result))
+}
+
+func (uc *UserController) DeleteUser(res http.ResponseWriter, _ *http.Request, params httprouter.Params) {
+	id := params.ByName("id")
+	fmt.Println(id)
+
+	if !bson.IsObjectIdHex(id) {
+		res.WriteHeader(http.StatusNotFound)
+		return
+	}
+	ID := bson.ObjectIdHex(id)
+
+	user := models.User{}
+
+	err := uc.session.DB("learning-go").C("users").RemoveId(ID)
+	if err != nil {
+		fmt.Println("Could not find user", err)
+		res.WriteHeader(http.StatusNotFound)
+		return
+	}
+	result, err := json.Marshal(&user)
+	if err != nil {
+		res.WriteHeader(http.StatusNotFound)
+		return
+	}
+	res.Header().Set("Content-Type", "application/json")
+	res.WriteHeader(http.StatusOK)
 	fmt.Fprint(res, string(result))
 }
